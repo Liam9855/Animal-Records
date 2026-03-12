@@ -1,0 +1,57 @@
+<view class="container" wx:if="{{!loading}}">
+  
+  <!-- 邮件头部 -->
+  <view class="mail-header">
+    <view class="subject-row">
+      <text class="subject">关于 {{detail.animal_name}} 的反馈</text>
+      <view class="tag {{detail.status}}">{{detail.status === 'pending' ? '未读' : '已读'}}</view>
+    </view>
+    
+    <view class="meta-row">
+      <view class="sender-info">
+        <view class="avatar">{{detail.contact_info ? '联' : '匿'}}</view>
+        <view class="sender-text">
+          <text class="name">{{detail.contact_info ? '有联系方式的用户' : '匿名用户'}}</text>
+          <text class="date">{{detail.timeFull}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="divider"></view>
+
+  <!-- 邮件正文 -->
+  <view class="mail-body">
+    
+    <!-- 纯文本内容 -->
+    <view class="text-content" wx:if="{{detail.content}}">
+      <text user-select>{{detail.content}}</text>
+    </view>
+    <view class="empty-text" wx:else>
+      (用户未填写文字内容)
+    </view>
+
+    <!-- 联系方式区块 -->
+    <view class="contact-block" wx:if="{{detail.contact_info}}">
+      <text class="label">联系方式：</text>
+      <text class="value" user-select>{{detail.contact_info}}</text>
+    </view>
+
+    <!-- 附件/图片区域 -->
+    <view class="attachments" wx:if="{{detail.images && detail.images.length > 0}}">
+      <view class="att-title">图片附件 ({{detail.images.length}})</view>
+      <view class="img-grid">
+        <block wx:for="{{detail.images}}" wx:key="*this">
+          <image src="{{item}}" mode="aspectFill" class="att-img" bindtap="previewImage" data-src="{{item}}"></image>
+        </block>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 底部工具栏 -->
+  <view class="footer-toolbar">
+    <button class="btn delete" bindtap="deleteFeedback">删除此反馈</button>
+  </view>
+
+</view>

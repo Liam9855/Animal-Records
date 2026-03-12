@@ -1,0 +1,188 @@
+page {
+  background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.universe-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: none; 
+}
+
+.admin-entry {
+  position: fixed;
+  top: 100rpx;
+  right: 30rpx;
+  z-index: 999;
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10rpx 24rpx;
+  border-radius: 30rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.admin-entry text {
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2rpx 2rpx at 20rpx 30rpx, #eee, rgba(0,0,0,0)),
+    radial-gradient(2rpx 2rpx at 40rpx 70rpx, #fff, rgba(0,0,0,0)),
+    radial-gradient(2rpx 2rpx at 50rpx 160rpx, #ddd, rgba(0,0,0,0)),
+    radial-gradient(2rpx 2rpx at 90rpx 40rpx, #fff, rgba(0,0,0,0)),
+    radial-gradient(2rpx 2rpx at 130rpx 80rpx, #fff, rgba(0,0,0,0));
+  background-size: 200rpx 200rpx;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.center-planet {
+  width: 120rpx;
+  height: 120rpx;
+  background: #ffcc00;
+  border-radius: 50%;
+  box-shadow: 0 0 50rpx rgba(255, 204, 0, 0.6);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -60rpx;
+  margin-top: -60rpx;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.center-text {
+  font-weight: bold;
+  color: #5a4a00;
+  font-size: 24rpx;
+}
+
+/* 轨道环 (恢复了边框) */
+.orbit-ring {
+  position: absolute;
+  border: 1rpx solid rgba(255, 255, 255, 0.1); 
+  border-radius: 50%;
+  animation-name: orbit-rotate;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  
+  pointer-events: none; 
+  z-index: 5;
+}
+
+/* 行星包裹器 */
+.planet-wrapper {
+  position: absolute;
+  top: -30rpx; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation-name: counter-rotate;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  
+  pointer-events: auto; 
+  z-index: 100;
+}
+
+.planet-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  box-shadow: 0 0 20rpx rgba(255, 255, 255, 0.5);
+  position: relative; /* 为了定位角标 */
+}
+
+.planet-name {
+  color: #fff;
+  font-size: 20rpx;
+  margin-top: 8rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.8);
+}
+
+/* 红色数字角标样式 */
+.update-bubble {
+  position: absolute;
+  top: -6rpx;
+  right: -10rpx; 
+  min-width: 32rpx;
+  height: 32rpx;
+  background: #f5222d;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid #fff;
+  padding: 0 6rpx;
+  box-sizing: border-box;
+  animation: none; 
+  z-index: 10;
+}
+
+.update-bubble text {
+  font-size: 20rpx;
+  color: #fff;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* 底部提示样式 */
+.footer-tip {
+  position: absolute;
+  bottom: 40rpx;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  z-index: 10; /* 降低提示的层级 */
+}
+
+.footer-tip text {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.4); 
+  letter-spacing: 1rpx;
+}
+
+/* 左下角动图样式 - 修改位置和层级 */
+.sticker-box {
+  position: absolute;
+  /* 稍微抬高一点位置，使其位于文字上方 */
+  bottom: 80rpx; 
+  left: 30rpx;
+  /* 确保 z-index 比 footer-tip 高，保证在上方显示 */
+  z-index: 20; 
+  pointer-events: none; 
+}
+
+.sticker-gif {
+  width: 120rpx; 
+  height: auto;
+  display: block;
+}
+
+@keyframes orbit-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes counter-rotate {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(-360deg); }
+}

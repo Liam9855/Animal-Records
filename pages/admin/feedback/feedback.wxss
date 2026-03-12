@@ -1,0 +1,120 @@
+page {
+  background: #fff;
+}
+
+.container {
+  padding: 0;
+}
+
+.mail-list {
+  width: 100%;
+}
+
+.mail-item {
+  display: flex;
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  background: #fff;
+  transition: background 0.2s;
+}
+
+.mail-item:active {
+  background: #f9f9f9;
+}
+
+/* 未读状态高亮背景 */
+.mail-item.unread {
+  background: #fcfcfc;
+}
+
+.mail-left {
+  margin-right: 24rpx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6rpx;
+}
+
+.status-dot {
+  width: 16rpx;
+  height: 16rpx;
+  background: #1890ff; /* 邮件风格通常用蓝色表示未读 */
+  border-radius: 50%;
+  position: absolute;
+  top: 6rpx;
+  left: -10rpx;
+}
+
+.sender-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  background: #e6f7ff;
+  color: #1890ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.mail-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.mail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+
+.mail-sender {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mail-time {
+  font-size: 24rpx;
+  color: #999;
+  font-weight: normal;
+}
+
+.mail-subject {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.mail-snippet {
+  font-size: 26rpx;
+  color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 未读状态下文字更黑 */
+.unread .mail-sender, .unread .mail-subject {
+  color: #000;
+  font-weight: 700;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 200rpx;
+  color: #ccc;
+}
+
+.empty-icon { font-size: 80rpx; margin-bottom: 20rpx; }
+.empty-text { font-size: 28rpx; }

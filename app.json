@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/admin/manager/manager",
+    "pages/cats/cats",
+    "pages/dogs/dogs",
+    "pages/detail/detail",
+    "pages/admin/migration/migration",
+    "pages/admin/editor/editor",
+    "pages/admin/feedback_detail/feedback_detail",
+    "pages/admin/feedback/feedback",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "demo title",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1296db",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/dogs/dogs",
+        "text": "哈基汪",
+        "iconPath": "images/dog.png",
+        "selectedIconPath": "images/dog-active.png"
+      },
+      {
+        "pagePath": "pages/cats/cats",
+        "text": "哈基咪",
+        "iconPath": "images/cat.png",
+        "selectedIconPath": "images/cat-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/my-active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 600000,
+    "downloadFile": 600000
+  },
+  "sitemapLocation": "sitemap.json"
+}

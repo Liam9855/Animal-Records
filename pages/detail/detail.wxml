@@ -1,0 +1,323 @@
+<view>
+  <!-- 轮播图 -->
+  <swiper class="hero-swiper" indicator-dots="true" autoplay="true" interval="4000" circular="true" indicator-active-color="#fff">
+    <block wx:for="{{animal.album}}" wx:key="*this">
+      <swiper-item>
+        <image class="swiper-img" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-src="{{item}}" data-urls="{{animal.album}}" lazy-load="true" webp="true"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="content-card">
+    <!-- 头部信息 -->
+    <view class="header-section">
+      <view class="name-row">
+        <view class="name-left-top">
+          <text class="name">{{animal.nickname}}</text>
+          <view class="gender-badge {{animal.gender == '公' ? 'male' : 'female'}}">
+            <text class="gender-symbol-large">{{animal.gender == '公' ? '♂' : '♀'}}</text>
+          </view>
+        </view>
+
+        <!-- 按钮组 -->
+        <view class="btn-group">
+          <!-- 动态按钮文字 -->
+          <view class="mini-btn outline" style="margin-right: 16rpx;" bindtap="onSubscribe">
+            {{isSubscribed ? '已订阅' : '订阅我'}}
+          </view>
+          <view class="mini-btn outline" bindtap="openCorrectionModal">补充/更正</view>
+        </view>
+      </view>
+      
+      <view class="tags-row-new">
+        <text class="status-tag {{animal.is_neutered ? 'neutered' : ''}}">{{animal.is_neutered ? '已绝育' : '未绝育'}}</text>
+        <text class="status-tag {{animal.is_adopted ? 'adopted' : 'school'}}">{{animal.is_adopted ? '已领养' : '在校'}}</text>
+      </view>
+
+      <view class="base-info">
+        <view class="info-item"><text class="label">常驻地</text><text class="value">{{animal.location}}</text></view>
+        <view class="info-item"><text class="label">生日/年龄</text><text class="value">{{animal.birthday || '未知'}}</text></view>
+         <view class="info-item"><text class="label">交互指南</text><text class="value {{animal.touchable ? 'text-green' : 'text-red'}}">{{animal.touchable ? '✅ 可撸' : '🚫 不可撸'}}</text></view>
+      </view>
+    </view>
+
+    <!-- 关系网 -->
+    <view class="section">
+      <text class="section-title">家族关系</text>
+      <view class="relation-grid">
+        <view class="relation-item"><text class="label">爸爸</text><text class="value">{{animal.dad || '未知'}}</text></view>
+        <view class="relation-item"><text class="label">妈妈</text><text class="value">{{animal.mom || '未知'}}</text></view>
+        <view class="relation-item full-width"><text class="label">好友</text><text class="value">{{animal.friends || '独行侠'}}</text></view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">关于它</text>
+      <text class="bio-text" style="display: block; white-space: pre-wrap; margin-top: 10rpx;">{{animal.bio}}</text>
+    </view>
+
+
+    <view class="section comments-section" wx:if="{{showTimeline}}">
+      <view class="section-header">
+        <!-- 显示总评论数 totalComments -->
+        <text class="section-title" style="margin-bottom:0;">最新动态 ({{totalComments}})</text>
+        <view class="mini-btn primary" bindtap="openCommentModal">发布动态</view>
+      </view>
+
+      <view class="legal-tip">请友善发言，遵守法律法规。</view>
+
+      <view class="comment-list">
+        <block wx:for="{{commentsList}}" wx:key="_id" wx:for-item="mainComment">
+          <view class="comment-item" bindtap="openReplyDetail" data-item="{{mainComment}}">
+            <image class="comment-avatar" src="{{mainComment.avatar}}" mode="aspectFill"></image>
+            <view class="comment-right">
+              <view class="comment-user-row">
+                <text class="comment-nickname">{{mainComment.nickname}}</text>
+                <text class="top-tag" wx:if="{{index < 0}}">置顶</text> 
+              </view>
+              <view class="comment-text"><text user-select="true">{{mainComment.content}}</text></view>
+              
+              <!-- 视频包裹结构，支持动态控制 Controls -->
+              <view class="video-wrapper" wx:if="{{mainComment.video}}">
+                <video 
+                  id="video-{{mainComment._id}}" 
+                  src="{{mainComment.video}}" 
+                  class="comment-video-inner" 
+                  object-fit="cover" 
+                  show-mute-btn 
+                  show-center-play-btn="{{false}}" 
+                  enable-play-gesture="{{false}}"
+                  controls="{{playingVideoId === 'video-' + mainComment._id}}"
+                  bindfullscreenchange="onFullScreenChange"
+                ></video>
+                <!-- 遮罩层，点击触发全屏。播放时隐藏 -->
+                <view 
+                  class="video-mask" 
+                  data-id="video-{{mainComment._id}}" 
+                  catchtap="playFullScreen"
+                  wx:if="{{playingVideoId !== 'video-' + mainComment._id}}"
+                >
+                  <view class="play-btn-icon">▶</view>
+                </view>
+              </view>
+
+              <view class="comment-imgs" wx:if="{{mainComment.images && mainComment.images.length > 0}}">
+                <block wx:for="{{mainComment.images}}" wx:key="*this" wx:for-item="img">
+                  <image src="{{img}}" class="c-img" mode="aspectFill" catchtap="previewImage" data-src="{{img}}" data-urls="{{mainComment.images}}"></image>
+                </block>
+              </view>
+
+              <view class="comment-footer">
+                <text class="comment-time">{{mainComment.timeStr}}</text>
+                
+                <view class="footer-stats">
+                  <view class="stat-item {{mainComment.isUploading ? 'disabled-btn' : ''}}" catchtap="toggleLike" data-index="{{index}}">
+                    <text class="icon" style="color: {{mainComment.isLiked ? '#f5222d' : '#576b95'}};">{{mainComment.isLiked ? '♥' : '♡'}}</text>
+                    <text class="num">{{mainComment.likeCount || 0}}</text>
+                  </view>
+                  <view class="stat-item {{mainComment.isUploading ? 'disabled-btn' : ''}}" catchtap="openReplyDetail" data-item="{{mainComment}}">
+                    <text class="icon">💬</text>
+                    <text class="num">{{mainComment.replyCount > 0 ? mainComment.replyCount : '回复'}}</text> 
+                  </view>
+                </view>
+              </view>
+              
+              <!-- 上传中状态提示 -->
+              <view wx:if="{{mainComment.isUploading}}" class="uploading-tip">
+                正在上传中，请勿退出小程序...
+              </view>
+
+              <!-- 删除按钮 -->
+              <view wx:if="{{(mainComment.isMyComment || isAdmin) && !mainComment.isUploading}}" class="delete-link" catchtap="deleteComment" data-item="{{mainComment}}" style="margin-top:10rpx; text-align:right;">删除</view>
+
+              <!-- 取消发送按钮 -->
+              <view wx:if="{{mainComment.isUploading}}" class="delete-link" catchtap="cancelUpload" data-id="{{mainComment._id}}" style="margin-top:10rpx; text-align:right; color: #fa5151;">取消发送</view>
+
+            </view>
+          </view>
+        </block>
+        
+        <view class="load-more-tip" wx:if="{{isLoading}}">正在加载...</view>
+        <view class="load-more-tip" wx:if="{{!hasMore && commentsList.length > 0}}">—— 没有更多了 ——</view>
+        
+        <view wx:if="{{commentsList.length === 0 && !isLoading}}" class="empty-comments">
+          <text>还没有人留言，快来抢沙发~</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ... (弹窗保持不变) ... -->
+  <view class="reply-detail-modal" wx:if="{{showReplyDetailModal}}">
+    <view class="detail-mask" bindtap="closeReplyDetail"></view>
+    <view class="detail-container">
+      <view class="detail-header">详情</view>
+      
+      <scroll-view scroll-y="true" class="detail-scroll">
+        <view class="main-comment-section">
+          <view class="comment-item no-border">
+            <image class="comment-avatar" src="{{currentReplyItem.avatar}}" mode="aspectFill"></image>
+            <view class="comment-right">
+              <view class="comment-user-row">
+                <text class="comment-nickname">{{currentReplyItem.nickname}}</text>
+              </view>
+              <view class="comment-text" style="font-size: 32rpx;"><text user-select="true">{{currentReplyItem.content}}</text></view>
+              
+              <!-- 弹窗内视频同样结构 -->
+              <view class="video-wrapper" wx:if="{{currentReplyItem.video}}">
+                <video 
+                  id="video-detail-{{currentReplyItem._id}}" 
+                  src="{{currentReplyItem.video}}" 
+                  class="comment-video-inner" 
+                  object-fit="cover" 
+                  show-mute-btn 
+                  show-center-play-btn="{{false}}" 
+                  enable-play-gesture="{{false}}"
+                  controls="{{playingVideoId === 'video-detail-' + currentReplyItem._id}}"
+                  bindfullscreenchange="onFullScreenChange"
+                ></video>
+                <view 
+                  class="video-mask" 
+                  data-id="video-detail-{{currentReplyItem._id}}" 
+                  catchtap="playFullScreen"
+                  wx:if="{{playingVideoId !== 'video-detail-' + currentReplyItem._id}}"
+                >
+                  <view class="play-btn-icon">▶</view>
+                </view>
+              </view>
+
+              <view class="comment-imgs" wx:if="{{currentReplyItem.images && currentReplyItem.images.length > 0}}">
+                <block wx:for="{{currentReplyItem.images}}" wx:key="*this" wx:for-item="img">
+                  <image src="{{img}}" class="c-img" mode="aspectFill" catchtap="previewImage" data-src="{{img}}" data-urls="{{currentReplyItem.images}}"></image>
+                </block>
+              </view>
+              <view class="comment-footer">
+                <text class="comment-time">{{currentReplyItem.timeStr}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="replies-list-section">
+          <view class="like-row" wx:if="{{currentReplyItem.likeCount > 0}}">
+             <text class="icon">♡</text> <text>{{currentReplyItem.likeCount}}人觉得很赞</text>
+          </view>
+
+          <block wx:for="{{currentReplyItem.replies}}" wx:key="_id">
+            <view class="reply-row" bindtap="onReplyInDetail" data-item="{{item}}">
+              <image class="reply-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+              <view class="reply-content-box">
+                <view class="reply-header">
+                  <text class="reply-nick">{{item.nickname}}</text>
+                  <text class="reply-time">{{item.timeStr}}</text>
+                </view>
+                <view class="reply-body">
+                  <text wx:if="{{item.reply_to_user}}" style="color:#333;">回复 </text>
+                  <text wx:if="{{item.reply_to_user}}" class="reply-nick">{{item.reply_to_user}}</text>
+                  <text>：{{item.content}}</text>
+                </view>
+                <view wx:if="{{item.isMyComment || isAdmin}}" class="delete-link small" catchtap="deleteComment" data-item="{{item}}" style="margin-top:6rpx;">删除</view>
+              </view>
+            </view>
+          </block>
+          
+          <view wx:if="{{(!currentReplyItem.replies || currentReplyItem.replies.length === 0)}}" class="empty-replies">暂无回复</view>
+        </view>
+      </scroll-view>
+
+      <view class="detail-input-bar">
+        <view class="reply-target-tag" wx:if="{{replyTo}}">
+          <text>回复 {{replyTo.user}}</text>
+          <view class="close-icon" catchtap="clearReplyTo">×</view>
+        </view>
+
+        <input class="real-input" 
+               placeholder="{{replyTo ? '请输入内容...' : '回复 ' + currentReplyItem.nickname}}" 
+               bindinput="onCommentInput" 
+               bindconfirm="submitComment" 
+               value="{{commentContent}}"
+               confirm-type="send"
+               cursor-spacing="20"
+               focus="{{replyFocus}}" 
+               bindfocus="ensureLogin"
+        />
+        <view class="send-btn-inline" bindtap="submitComment">发送</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal-mask" style="z-index: 2000;" wx:if="{{showCorrectionModal}}" bindtap="closeCorrectionModal">
+    <view class="modal-content" catchtap="stopProp">
+      <view class="modal-header">补充/更正信息</view>
+      <textarea class="modal-input" placeholder="请留下需要补充或者更正的信息，如果有好看的照片也可以提交给我，我会第一时间更新。" bindinput="onCorrectionInput" value="{{correctionContent}}"></textarea>
+      <view class="image-uploader">
+        <block wx:for="{{correctionImages}}" wx:key="*this">
+          <view class="upload-item">
+            <image src="{{item}}" mode="aspectFill" class="upload-img"></image>
+            <view class="delete-btn" catchtap="removeCorrectionImage" data-index="{{index}}">×</view>
+          </view>
+        </block>
+        <view class="upload-add" bindtap="chooseCorrectionImages" wx:if="{{correctionImages.length < 6}}"><text>+</text></view>
+      </view>
+      <input class="modal-input-line" placeholder="您的联系方式（选填）" bindinput="onContactInput" value="{{contactInfo}}" />
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="closeCorrectionModal">取消</button>
+        <button class="btn-submit" bindtap="submitCorrection">提交</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal-mask" style="z-index: 2000;" wx:if="{{showCommentModal}}" bindtap="closeCommentModal">
+    <view class="modal-content" catchtap="stopProp">
+      <view class="modal-header">
+        {{replyTo ? '回复 ' + replyTo.user : '发布动态'}}
+      </view>
+
+      <textarea class="modal-input" 
+                placeholder="遇见{{animal.nickname}}了吗？拍个照记录下它吧！" 
+                bindinput="onCommentInput" 
+                value="{{commentContent}}"
+                cursor-spacing="100">
+      </textarea>
+      
+      <block wx:if="{{!replyTo}}">
+        <view class="form-label" style="margin-top:20rpx;">配图 ({{commentImages.length}}/6)</view>
+        <view class="image-uploader">
+          <block wx:for="{{commentImages}}" wx:key="*this">
+            <view class="upload-item small">
+              <image src="{{item}}" mode="aspectFill" class="upload-img"></image>
+              <view class="delete-btn" catchtap="removeCommentImage" data-index="{{index}}">×</view>
+            </view>
+          </block>
+          <!-- 屏蔽视频预览 -->
+          <!-- <block wx:if="{{commentVideo}}"> ... </block> -->
+          <view class="upload-add small" bindtap="chooseMedia" wx:if="{{commentImages.length < 6}}">
+            <text>+</text>
+          </view>
+        </view>
+      </block>
+
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="closeCommentModal">取消</button>
+        <button class="btn-submit" bindtap="submitComment">发送</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal-mask" style="z-index: 2000;" wx:if="{{showAuthModal}}" bindtap="closeAuthModal">
+    <view class="modal-content" style="max-width: 500rpx; padding: 30rpx;" catchtap="stopProp">
+      <view class="modal-header">快速授权</view>
+      <view style="display:flex; flex-direction:column; align-items:center; margin-bottom:30rpx;">
+        <button open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" style="width:120rpx; height:120rpx; border-radius:50%; padding:0; margin: 0 0 20rpx 0; background-color: #eee; display: flex; align-items: center; justify-content: center;">
+          <image src="{{authAvatar || '../../images/cat.png'}}" style="width:100%; height:100%; border-radius:50%;"></image>
+        </button>
+        <text style="font-size:24rpx; color:#999;">点击设置头像</text>
+      </view>
+      <view style="border-bottom:1rpx solid #eee; padding:10rpx 0; margin-bottom:40rpx;">
+        <input type="nickname" class="nick-input" placeholder="请输入昵称" bindinput="onAuthNickNameInput" style="text-align:center; font-size:32rpx;"/>
+      </view>
+      <button class="btn-submit" bindtap="confirmAuth" style="width:100%;">确认登录</button>
+    </view>
+  </view>
+
+</view>

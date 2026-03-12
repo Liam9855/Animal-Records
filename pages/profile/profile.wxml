@@ -1,0 +1,52 @@
+<view class="container">
+  
+  <!-- 已登录状态 -->
+  <block wx:if="{{userInfo}}">
+    <view class="profile-card">
+      <view class="avatar-section">
+        <!-- 1. 删除了内部的相机图标，保留 open-type 属性以支持点击换头像 -->
+        <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseNewAvatar">
+          <image class="avatar-img" src="{{avatarUrl}}" mode="aspectFill"></image>
+        </button>
+        <view class="uid-tag">UID: {{userInfo.uid}}</view>
+      </view>
+
+      <!-- 2. 改为纯文字显示 + 编辑图标 -->
+      <view class="nickname-row">
+        <text class="nickname-text">{{nickName}}</text>
+        <view class="edit-icon" bindtap="onEditNickname">✎</view>
+      </view>
+      
+      <!-- 新增：管理员入口按钮 (仅管理员可见) -->
+      <view class="admin-entry-box" wx:if="{{isAdmin}}" bindtap="goToAdminPanel">
+        <text class="admin-btn-text">⚙️ 进入管理后台</text>
+      </view>
+      
+      <view class="logout-link" bindtap="logout">退出登录</view>
+    </view>
+  </block>
+
+  <!-- 未登录状态 (通常会被弹窗拦截，这里作为兜底) -->
+  <block wx:else>
+    <view class="empty-state">
+      <text>请先登录</text>
+      <button class="login-btn" bindtap="checkLoginStatus">点击登录</button>
+    </view>
+  </block>
+
+  <!-- 登录授权弹窗 (复用) -->
+  <view class="modal-mask" wx:if="{{showAuthModal}}">
+    <view class="modal-content">
+      <view class="modal-header">欢迎加入</view>
+      <view class="auth-box">
+        <button class="auth-avatar-wrapper" open-type="chooseAvatar" bindchooseavatar="onChooseAuthAvatar">
+          <image src="{{authAvatar || '../../images/cat.png'}}" class="auth-avatar"></image>
+        </button>
+        <text class="tip">点击设置头像</text>
+      </view>
+      <input type="nickname" class="auth-input" placeholder="请输入昵称" bindinput="onAuthNickNameInput" />
+      <button class="auth-confirm-btn" bindtap="confirmAuth">确认进入</button>
+    </view>
+  </view>
+
+</view>

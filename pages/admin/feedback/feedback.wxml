@@ -1,0 +1,31 @@
+<view class="container">
+  <view wx:if="{{corrections.length === 0}}" class="empty-state">
+    <text class="empty-icon">📭</text>
+    <text class="empty-text">暂无反馈消息</text>
+  </view>
+  
+  <view class="mail-list">
+    <block wx:for="{{corrections}}" wx:key="_id">
+      <view class="mail-item {{item.status === 'pending' ? 'unread' : ''}}" bindtap="goToDetail" data-id="{{item._id}}">
+        
+        <!-- 左侧状态条/头像 -->
+        <view class="mail-left">
+          <view class="status-dot" wx:if="{{item.status === 'pending'}}"></view>
+          <view class="sender-avatar">{{item.contact_info ? '联' : '匿'}}</view>
+        </view>
+
+        <!-- 中间内容摘要 -->
+        <view class="mail-content">
+          <view class="mail-header">
+            <!-- ✅ 修改：直接显示用户ID，不考虑旧数据 -->
+            <text class="mail-sender">用户id: {{item.uid}}</text>
+            <text class="mail-time">{{item.timeStr}}</text>
+          </view>
+          <view class="mail-subject">关于 {{animalName}} 的补充信息</view>
+          <view class="mail-snippet">{{item.content || '[图片反馈]'}}</view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+</view>

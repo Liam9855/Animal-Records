@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="header">
+    <text class="title">汪星人基地 🐶</text>
+    <text class="subtitle">已有 {{dogs.length}} 只狗狗登记在册</text>
+  </view>
+
+  <view class="animal-list">
+    <block wx:for="{{dogs}}" wx:key="_id">
+      <view class="card" bindtap="goToDetail" data-id="{{item._id}}">
+        <image class="card-img" src="{{item.image_url}}" mode="aspectFill"></image>
+        <view class="card-info">
+          <view class="card-header">
+            <text class="name">{{item.nickname}}</text>
+            <!-- 修复：性别图标容器，去除多余空格 -->
+            <view class="gender-box {{item.gender == '公' ? 'male' : 'female'}}">
+              <text class="gender-symbol">{{item.gender == '公' ? '♂' : '♀'}}</text>
+            </view>
+          </view>
+          
+          <view class="tag-row">
+            <!-- 1. 状态标签 -->
+            <text class="tag status">{{item.status || '在校'}}</text>
+            
+            <!-- 2. ✅ 已调换：可撸/不可撸 -->
+            <text class="tag touchable {{item.touchable ? 'yes' : 'no'}}">{{item.touchable ? '可撸' : '不可撸'}}</text>
+
+            <!-- 3. ✅ 已调换：位置标签 -->
+            <text class="tag location">{{item.location}}</text>
+          </view>
+          <text class="description">{{item.bio}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,318 @@
+/* 页面整体背景 */
+page {
+  background-color: #f6f7f9;
+  padding-bottom: 60rpx;
+}
+
+/* ... (原有样式保持不变) ... */
+
+/* --- 新增：上传中提示语样式 --- */
+.uploading-tip {
+  font-size: 22rpx;
+  color: #999;
+  background-color: #f8f8f8;
+  padding: 6rpx 12rpx;
+  border-radius: 8rpx;
+  margin-top: 12rpx;
+  display: inline-block;
+}
+
+/* 禁用状态的按钮透明度 */
+.disabled-btn {
+  opacity: 0.4;
+}
+
+/* ... (后续原有样式保持不变) ... */
+
+/* 删除链接样式 - 移出 page{} */
+.delete-link { 
+  font-size: 24rpx; 
+  color: #576b95; 
+  margin-right: 8rpx; 
+}
+.delete-link.small { 
+  font-size: 22rpx; 
+}
+
+/* 空状态提示 - 移出 page{} */
+.empty-comments { 
+  text-align: center; 
+  color: #ccc; 
+  font-size: 28rpx; 
+  padding: 60rpx 0; 
+}
+
+/* 加载状态提示样式 - 移出 page{} */
+.load-more-tip {
+  text-align: center;
+  font-size: 24rpx;
+  color: #ccc;
+  padding: 30rpx 0;
+  background-color: transparent;
+}
+
+/* ... (原有顶部 Swiper, content-card, header 等样式保持不变) ... */
+.hero-swiper { width: 100%; height: 500rpx; background-color: #eee; position: relative; }
+swiper-item { width: 100%; height: 100%; }
+.swiper-img { width: 100%; height: 100%; display: block; position: absolute; top: 0; left: 0; object-fit: cover; }
+.content-card { background-color: #fff; border-radius: 40rpx 40rpx 0 0; margin-top: -50rpx; padding: 40rpx; position: relative; min-height: 500rpx; z-index: 10; }
+.header-section { margin-bottom: 40rpx; border-bottom: 1rpx solid #eee; padding-bottom: 30rpx; }
+.name-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24rpx; }
+.name-left { display: flex; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 16rpx; flex: 1; }
+.name { font-size: 48rpx; font-weight: bold; color: #333; line-height: 1.2; margin-right: 8rpx; }
+.tags-row { display: flex; align-items: center; gap: 12rpx; }
+.mini-btn { font-size: 24rpx; padding: 10rpx 24rpx; border-radius: 30rpx; font-weight: bold; flex-shrink: 0; }
+.mini-btn.outline { border: 2rpx solid #ddd; color: #666; background: #fff; }
+.mini-btn.primary { background: #1890ff; color: #fff; box-shadow: 0 4rpx 10rpx rgba(24, 144, 255, 0.3); }
+
+/* --- 性别与状态标签 --- */
+.gender-badge { 
+  width: 40rpx; 
+  height: 40rpx; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-top: -4rpx; 
+}
+.gender-symbol-large { 
+  color: #fff; 
+  font-size: 24rpx; 
+  font-weight: bold; 
+  line-height: 1; 
+}
+.gender-badge.male { background: linear-gradient(90deg, #1890ff, #69c0ff); }
+.gender-badge.female { background: linear-gradient(90deg, #eb2f96, #ffadd2); }
+.status-tag { font-size: 22rpx; padding: 6rpx 14rpx; border-radius: 8rpx; background-color: #f0f0f0; color: #666; }
+.status-tag.neutered { background-color: #fff7e6; color: #fa8c16; }
+.status-tag.adopted { background-color: #e6fffb; color: #13c2c2; }
+.base-info { display: flex; justify-content: space-between; margin-top: 30rpx; }
+.info-item { display: flex; flex-direction: column; }
+.info-item .label { font-size: 22rpx; color: #999; margin-bottom: 8rpx; }
+.info-item .value { font-size: 28rpx; color: #333; font-weight: 500; }
+.text-green { color: #52c41a; }
+.text-red { color: #f5222d; }
+.section { margin-bottom: 50rpx; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24rpx; }
+.section-title { font-size: 32rpx; font-weight: bold; color: #333; display: block; margin-bottom: 16rpx; }
+.relation-grid { display: flex; flex-wrap: wrap; gap: 20rpx; }
+.relation-item { background-color: #f9f9f9; padding: 20rpx; border-radius: 12rpx; width: 42%; }
+.relation-item.full-width { width: 100%; }
+.relation-item .label { font-size: 22rpx; color: #999; display: block; margin-bottom: 6rpx; }
+.relation-item .value { font-size: 28rpx; color: #333; font-weight: 500; }
+.bio-text { font-size: 30rpx; color: #444; line-height: 1.8; text-align: justify; }
+
+/* --- 评论留言区 --- */
+.comments-section { padding-top: 10rpx; }
+.legal-tip { font-size: 22rpx; color: #aaa; background-color: #f8f8f8; padding: 10rpx 16rpx; border-radius: 8rpx; margin-bottom: 30rpx; text-align: left; }
+.comment-list { display: flex; flex-direction: column; }
+.comment-item { display: flex; margin-bottom: 40rpx; border-bottom: 1rpx dashed #eee; padding-bottom: 24rpx; }
+.comment-item.no-border { border-bottom: none; margin-bottom: 0; } 
+
+.comment-avatar { width: 72rpx; height: 72rpx; border-radius: 8rpx; background-color: #eee; margin-right: 24rpx; flex-shrink: 0; }
+.comment-right { flex: 1; display: flex; flex-direction: column; }
+.comment-user-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8rpx; }
+.comment-nickname { font-size: 28rpx; color: #576b95; font-weight: bold; } 
+.top-tag { font-size: 20rpx; color: #fff; background: #fa5151; padding: 2rpx 8rpx; border-radius: 4rpx; }
+.comment-text { font-size: 30rpx; color: #333; line-height: 1.6; margin-bottom: 12rpx; text-align: justify; }
+
+/* 评论配图 */
+.comment-imgs { display: flex; flex-wrap: wrap; gap: 10rpx; margin: 10rpx 0; }
+.c-img { width: 140rpx; height: 140rpx; border-radius: 8rpx; background: #f0f0f0; }
+
+/* ✅ 修改：视频容器与遮罩样式 */
+.video-wrapper {
+  position: relative;
+  width: 320rpx;
+  height: 240rpx;
+  margin: 10rpx 0;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.comment-video-inner {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.video-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  /* 稍微带一点黑色遮罩，让播放按钮更明显 */
+  background: rgba(0,0,0,0.1); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-btn-icon {
+  font-size: 60rpx;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2rpx 10rpx rgba(0,0,0,0.5);
+}
+
+.comment-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8rpx; }
+.comment-time { font-size: 24rpx; color: #999; }
+
+/* 列表页底部统计 */
+.footer-stats { display: flex; align-items: center; gap: 30rpx; }
+.stat-item { display: flex; align-items: center; color: #576b95; font-size: 24rpx; }
+.stat-item .icon { font-size: 30rpx; margin-right: 6rpx; }
+.stat-item .num { font-weight: bold; }
+
+/* --- 详情弹窗 (仿朋友圈) --- */
+.reply-detail-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; display: flex; flex-direction: column; }
+.detail-mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+.detail-container {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 85vh; 
+  background: #fff;
+  border-radius: 24rpx 24rpx 0 0;
+  display: flex; flex-direction: column;
+  z-index: 2;
+  overflow: hidden;
+}
+.detail-header { text-align: center; font-size: 30rpx; font-weight: bold; padding: 20rpx; border-bottom: 1rpx solid #eee; color: #333; }
+.detail-scroll { flex: 1; overflow-y: auto; padding-bottom: 100rpx; }
+
+.main-comment-section { padding: 30rpx; border-bottom: 1rpx solid #f5f5f5; }
+
+.replies-list-section { padding: 20rpx 30rpx; background: #fff; }
+.like-row { padding: 10rpx 0; border-bottom: 1rpx solid #eee; font-size: 26rpx; color: #576b95; display: flex; align-items: center; margin-bottom: 20rpx; }
+.like-row .icon { margin-right: 10rpx; }
+
+.reply-row { display: flex; margin-bottom: 30rpx; }
+.reply-avatar { width: 64rpx; height: 64rpx; border-radius: 8rpx; background: #eee; margin-right: 20rpx; flex-shrink: 0; }
+.reply-content-box { flex: 1; border-bottom: 1rpx solid #f9f9f9; padding-bottom: 20rpx; }
+.reply-header { display: flex; justify-content: space-between; margin-bottom: 6rpx; }
+.reply-nick { font-size: 26rpx; color: #576b95; font-weight: bold; }
+.reply-time { font-size: 22rpx; color: #ccc; }
+.reply-body { font-size: 28rpx; color: #333; line-height: 1.5; }
+.empty-replies { text-align: center; color: #ccc; font-size: 24rpx; padding: 40rpx; }
+
+.detail-input-bar {
+  position: absolute; bottom: 0; left: 0; width: 100%;
+  background: #fff; border-top: 1rpx solid #eee;
+  padding: 16rpx 30rpx 40rpx; 
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.reply-target-tag {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+  white-space: nowrap;
+  max-width: 200rpx; 
+}
+
+.reply-target-tag text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.close-icon {
+  margin-left: 8rpx;
+  font-size: 28rpx;
+  color: #999;
+  padding: 0 4rpx;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.real-input {
+  flex: 1;
+  background: #f5f5f5; 
+  height: 72rpx; 
+  border-radius: 36rpx;
+  padding: 0 30rpx; 
+  font-size: 28rpx; 
+  color: #333;
+}
+
+.send-btn-inline {
+  font-size: 30rpx;
+  color: #1890ff;
+  font-weight: bold;
+  padding: 0 10rpx;
+}
+
+/* --- 弹窗样式 --- */
+.modal-mask { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 40rpx; box-sizing: border-box; }
+.modal-content { background: #fff; width: 100%; max-width: 600rpx; border-radius: 24rpx; padding: 40rpx; max-height: 90vh; overflow-y: auto; }
+.modal-header { font-size: 34rpx; font-weight: bold; text-align: center; margin-bottom: 30rpx; color: #333; }
+.modal-input { width: 100%; height: 200rpx; background: #f8f8f8; padding: 24rpx; box-sizing: border-box; border-radius: 12rpx; font-size: 30rpx; margin-bottom: 24rpx; color: #333; }
+
+.form-label { font-size: 26rpx; color: #666; margin-bottom: 16rpx; }
+.image-uploader { display: flex; flex-wrap: wrap; gap: 20rpx; margin-bottom: 30rpx; }
+.upload-item { position: relative; width: 120rpx; height: 120rpx; }
+.upload-item.small { width: 100rpx; height: 100rpx; }
+.upload-img { width: 100%; height: 100%; border-radius: 12rpx; }
+.delete-btn { position: absolute; top: -10rpx; right: -10rpx; background: rgba(0,0,0,0.6); color: #fff; width: 36rpx; height: 36rpx; border-radius: 50%; text-align: center; line-height: 36rpx; font-size: 24rpx; }
+.upload-add { width: 120rpx; height: 120rpx; background: #f8f8f8; border: 2rpx dashed #ddd; border-radius: 12rpx; display: flex; align-items: center; justify-content: center; font-size: 50rpx; color: #ccc; }
+.upload-add.small { width: 100rpx; height: 100rpx; }
+
+.modal-input-line { width: 100%; height: 80rpx; background: #f8f8f8; padding: 0 24rpx; box-sizing: border-box; border-radius: 12rpx; font-size: 28rpx; margin-bottom: 30rpx; border: 1rpx solid #eee; }
+.modal-footer { display: flex; gap: 24rpx; }
+.btn-cancel, .btn-submit { flex: 1; font-size: 30rpx; border-radius: 44rpx; height: 80rpx; line-height: 80rpx; font-weight: bold; border: none; }
+.btn-cancel { background: #f0f0f0; color: #666; }
+.btn-submit { background: #1890ff; color: #fff; }
+
+.login-row { display: flex; align-items: center; margin-bottom: 30rpx; padding-bottom: 20rpx; border-bottom: 1rpx solid #f0f0f0; }
+.avatar-wrapper { width: 100rpx; height: 100rpx; padding: 0; background: none; border-radius: 50%; overflow: hidden; margin-right: 24rpx; border: 1rpx solid #eee; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.avatar-wrapper::after { border: none; }
+.avatar-img { width: 100%; height: 100%; }
+.avatar-tip { font-size: 16rpx; color: #999; position: absolute; bottom: 8rpx; width: 100%; text-align: center; background: rgba(255,255,255,0.8); }
+.nick-wrapper { flex: 1; }
+.nick-label { font-size: 24rpx; color: #999; margin-bottom: 6rpx; }
+.nick-input { font-size: 32rpx; color: #333; border-bottom: 1rpx solid #eee; padding: 4rpx 0; height: 60rpx; }
+
+.header-section { 
+  margin-bottom: 40rpx; 
+  border-bottom: 1rpx solid #eee; 
+  padding-bottom: 30rpx; 
+}
+
+.name-row { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 12rpx; 
+}
+
+.name-left-top {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  flex: 1;
+}
+
+.name { 
+  font-size: 48rpx; 
+  font-weight: bold; 
+  color: #333; 
+  line-height: 1.2; 
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+}
+
+.tags-row-new {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 30rpx; 
+}

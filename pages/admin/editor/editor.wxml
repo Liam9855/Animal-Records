@@ -1,0 +1,140 @@
+<view class="container">
+  
+  <!-- 1. 头像区域 -->
+  <view class="avatar-section" bindtap="uploadImage">
+    <image wx:if="{{formData.image_url}}" src="{{formData.image_url}}" mode="aspectFill" class="avatar-preview"></image>
+    <view wx:else class="avatar-placeholder">
+      <text class="camera-icon">📷</text>
+      <text>点击上传头像</text>
+    </view>
+    <view class="edit-tip">点击图片更换</view>
+  </view>
+
+  <!-- 相册管理卡片 -->
+  <view class="card">
+    <view class="card-title">相册管理 (长按拖动排序)</view>
+    <view class="album-grid">
+      <block wx:for="{{formData.album}}" wx:key="*this">
+        <view 
+          class="album-item {{isDragging && dragIndex == index ? 'dragging-placeholder' : ''}}" 
+          bindlongpress="handleLongPress" 
+          data-index="{{index}}"
+        >
+          <image src="{{item}}" mode="aspectFill" class="album-img"></image>
+          <view class="delete-badge" catchtap="deleteImg" data-index="{{index}}">×</view>
+        </view>
+      </block>
+      
+      <view class="album-add" bindtap="uploadAlbumParams">
+        <text class="add-icon">+</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 拖拽遮罩 -->
+  <view 
+    wx:if="{{isDragging}}" 
+    class="drag-mask"
+    catchtouchmove="handleTouchMove"
+    catchtouchend="handleTouchEnd"
+  >
+    <view 
+      class="drag-proxy" 
+      style="left: {{dragX}}px; top: {{dragY}}px;"
+    >
+      <image src="{{dragImg}}" mode="aspectFill" class="album-img"></image>
+    </view>
+  </view>
+
+  <!-- 2. 基础信息 -->
+  <view class="card">
+    <view class="card-title">基础档案</view>
+    <view class="form-item border-bottom">
+      <text class="label">名字</text>
+      <input class="input" placeholder="输入昵称" value="{{formData.nickname}}" bindinput="onInput" data-field="nickname"/>
+    </view>
+    <view class="form-item border-bottom">
+      <text class="label">物种</text>
+      <picker range="{{typeLabels}}" bindchange="onTypeChange" class="picker-box">
+        <view class="picker-text">{{formData.type == 'cat' ? '猫 🐱' : '狗 🐶'}}</view>
+        <text class="arrow">></text>
+      </picker>
+    </view>
+    <view class="form-item border-bottom">
+      <text class="label">性别</text>
+      <picker range="{{genders}}" bindchange="onGenderChange" class="picker-box">
+        <view class="picker-text">{{formData.gender}}</view>
+        <text class="arrow">></text>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">生日/年龄</text>
+      <input class="input" placeholder="例如: 2021年" value="{{formData.birthday}}" bindinput="onInput" data-field="birthday"/>
+    </view>
+  </view>
+
+  <!-- 3. 状态管理 -->
+  <view class="card">
+    <view class="card-title">当前状态</view>
+    <view class="form-item border-bottom">
+      <text class="label">常驻地</text>
+      <input class="input" placeholder="例如: 食堂门口" value="{{formData.location}}" bindinput="onInput" data-field="location"/>
+    </view>
+    <view class="form-item border-bottom">
+      <text class="label">状态标签</text>
+      <input class="input" placeholder="例如: 在校 / 毕业" value="{{formData.status}}" bindinput="onInput" data-field="status"/>
+    </view>
+    <view class="switch-item border-bottom">
+      <text class="label">已绝育</text>
+      <switch checked="{{formData.is_neutered}}" bindchange="onSwitch" data-field="is_neutered" color="#1890ff" style="transform:scale(0.8)"/>
+    </view>
+    <view class="switch-item border-bottom">
+      <text class="label">已领养</text>
+      <switch checked="{{formData.is_adopted}}" bindchange="onSwitch" data-field="is_adopted" color="#1890ff" style="transform:scale(0.8)"/>
+    </view>
+    <view class="switch-item">
+      <text class="label">允许互动(可撸)</text>
+      <switch checked="{{formData.touchable}}" bindchange="onSwitch" data-field="touchable" color="#1890ff" style="transform:scale(0.8)"/>
+    </view>
+  </view>
+
+  <!-- ✅ 新增：家族关系 -->
+  <view class="card">
+    <view class="card-title">家族关系</view>
+    <view class="form-item border-bottom">
+      <text class="label">爸爸</text>
+      <input class="input" placeholder="未知" value="{{formData.dad}}" bindinput="onInput" data-field="dad"/>
+    </view>
+    <view class="form-item border-bottom">
+      <text class="label">妈妈</text>
+      <input class="input" placeholder="未知" value="{{formData.mom}}" bindinput="onInput" data-field="mom"/>
+    </view>
+    <view class="form-item">
+      <text class="label">好友</text>
+      <input class="input" placeholder="例如: 小黑, 小白" value="{{formData.friends}}" bindinput="onInput" data-field="friends"/>
+    </view>
+  </view>
+
+  <!-- 4. 详细介绍 -->
+  <view class="card">
+    <view class="card-title">详细介绍</view>
+    <textarea 
+      class="bio-textarea" 
+      placeholder="请填写它的性格、外貌特征等..." 
+      value="{{formData.bio}}" 
+      bindinput="onInput" 
+      data-field="bio" 
+      maxlength="200" 
+      disable-default-padding="{{true}}"
+    ></textarea>
+  </view>
+
+  <!-- 占位 -->
+  <view style="height: 120rpx;"></view>
+
+  <!-- 底部按钮 -->
+  <view class="footer-bar">
+    <button class="save-btn" bindtap="submit">保存档案</button>
+  </view>
+
+</view>

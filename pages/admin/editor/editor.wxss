@@ -1,0 +1,245 @@
+page {
+  background: #f6f7f9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  padding-bottom: 40rpx;
+}
+
+.container {
+  padding: 30rpx;
+}
+
+/* Avatar Section */
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.avatar-preview {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 6rpx solid #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  background: #e0e0e0;
+}
+
+.avatar-placeholder {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  background: #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 24rpx;
+  border: 6rpx solid #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.camera-icon {
+  font-size: 50rpx;
+  margin-bottom: 10rpx;
+}
+
+.edit-tip {
+  font-size: 24rpx;
+  color: #1890ff;
+  margin-top: 16rpx;
+  background: rgba(24, 144, 255, 0.1);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+/* Card Container */
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 0 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.02);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-title {
+  font-size: 28rpx;
+  color: #999;
+  padding: 24rpx 0 10rpx;
+  font-weight: bold;
+}
+
+/* --- 相册网格样式 --- */
+.album-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.album-item {
+  width: 150rpx;
+  height: 150rpx;
+  position: relative;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background: #f0f0f0;
+  border: 1rpx solid #eee;
+}
+
+.album-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 拖拽占位符 */
+.dragging-placeholder {
+  opacity: 0.3;
+  border: 2rpx dashed #1890ff;
+}
+
+/* --- 修复 BUG 关键：全屏遮罩 --- */
+.drag-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999; /* 最高层级，挡住页面滚动 */
+  background: transparent; /* 透明 */
+}
+
+/* 拖拽时的替身 */
+.drag-proxy {
+  position: absolute; /* 在 mask 内部绝对定位 */
+  width: 160rpx;
+  height: 160rpx;
+  opacity: 0.9;
+  box-shadow: 0 10rpx 20rpx rgba(0,0,0,0.3);
+  border-radius: 12rpx;
+  overflow: hidden;
+  border: 4rpx solid #1890ff;
+  /* 不需要 pointer-events: none，因为事件由父级 mask 处理 */
+}
+
+.delete-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  width: 40rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+  border-bottom-left-radius: 12rpx;
+  font-size: 24rpx;
+  z-index: 2;
+}
+
+.album-add {
+  width: 150rpx;
+  height: 150rpx;
+  border: 2rpx dashed #ccc;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.add-icon { font-size: 50rpx; line-height: 50rpx; }
+/* ---------------- */
+
+/* Form Items */
+.form-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  min-height: 60rpx;
+}
+
+.switch-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+}
+
+.border-bottom {
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.label {
+  font-size: 32rpx;
+  color: #333;
+  width: 200rpx;
+}
+
+.input {
+  flex: 1;
+  text-align: right;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.picker-box {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.picker-text {
+  font-size: 32rpx;
+  color: #333;
+  text-align: right;
+  display: inline-block;
+}
+
+.arrow {
+  color: #ccc;
+  margin-left: 10rpx;
+  font-family: monospace;
+}
+
+/* --- 详细介绍输入框 (风格统一化) --- */
+.bio-textarea {
+  width: 100%;
+  height: 300rpx; /* 保持高度 */
+  font-size: 32rpx;
+  line-height: 1.5;
+  color: #333;
+  padding: 20rpx 0; /* 上下留一点空隙，左右对齐 */
+  /* 去掉背景色，保持与上面卡片一致的清爽风格 */
+  background: transparent; 
+  border: none;
+}
+
+/* Footer Button */
+.footer-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 20rpx 40rpx 50rpx;
+  box-shadow: 0 -4rpx 12rpx rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.save-btn {
+  background: #1890ff;
+  color: #fff;
+  border-radius: 50rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+  height: 90rpx;
+  line-height: 90rpx;
+  box-shadow: 0 6rpx 16rpx rgba(24, 144, 255, 0.3);
+}

@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="header">
+    <view class="header-left">
+      <text class="title">档案管理后台</text>
+
+      <view class="switch-container">
+        <text class="switch-label">Thai</text>
+        <switch checked="{{thaiMode}}" bindchange="onThaiSwitchChange" color="#1890ff" style="transform:scale(0.7)"/>
+      </view>
+    </view>
+    
+    <view style="display: flex; gap: 20rpx;">
+      <view class="top-btn default" bindtap="goHome">🏠 首页</view>
+      <view class="top-btn primary" bindtap="goToAdd">+ 新增</view>
+    </view>
+  </view>
+
+  <view class="list">
+    <block wx:for="{{animals}}" wx:key="_id">
+      <view class="item">
+        <!-- 头像 -->
+        <image class="avatar" src="{{item.image_url}}" mode="aspectFill"></image>
+        
+        <!-- 中间信息 -->
+        <view class="info">
+          <view class="top-row">
+            <text class="name">{{item.nickname}}</text>
+            <text class="type-tag {{item.type}}">{{item.type == 'cat' ? '猫' : '狗'}}</text>
+          </view>
+          <text class="sub-info">{{item.status}}</text>
+        </view>
+        
+        <!-- 右侧操作区 -->
+        <view class="actions">
+          <view class="btn-wrapper" bindtap="goToFeedback" data-id="{{item._id}}" data-name="{{item.nickname}}">
+            <view class="action-btn feedback">反馈</view>
+            <view class="red-dot" wx:if="{{item.unreadCount > 0}}">{{item.unreadCount}}</view>
+          </view>
+
+          <view class="action-btn edit" bindtap="goToEdit" data-id="{{item._id}}">编辑</view>
+          
+          <view class="action-btn delete" bindtap="deleteItem" data-id="{{item._id}}" data-name="{{item.nickname}}">删除</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <view wx:if="{{animals.length === 0}}" class="empty">暂无数据</view>
+</view>

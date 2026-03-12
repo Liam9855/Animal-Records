@@ -1,0 +1,184 @@
+page { 
+  background: #f5f5f5; 
+}
+
+.container { 
+  padding: 30rpx; 
+}
+
+/* 顶部栏 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.title { 
+  font-size: 36rpx; 
+  font-weight: bold; 
+  color: #333;
+}
+
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 4rpx 10rpx 4rpx 20rpx;
+  border-radius: 30rpx;
+  border: 1rpx solid #ddd;
+}
+
+.switch-label {
+  font-size: 24rpx;
+  color: #666;
+  font-weight: bold;
+  margin-right: 0rpx;
+}
+
+/* 顶部按钮样式 */
+.top-btn {
+  font-size: 24rpx;
+  padding: 10rpx 24rpx;
+  border-radius: 30rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-btn.default {
+  background: #fff;
+  border: 1rpx solid #ddd;
+  color: #666;
+}
+
+.top-btn.primary {
+  background: #1890ff;
+  color: #fff;
+  box-shadow: 0 4rpx 10rpx rgba(24, 144, 255, 0.3);
+}
+
+/* 列表项卡片 */
+.item {
+  background: #fff;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  display: flex; /* 关键：横向布局 */
+  align-items: center;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.02);
+}
+
+/* 头像 */
+.avatar {
+  width: 100rpx; 
+  height: 100rpx;
+  border-radius: 12rpx;
+  margin-right: 24rpx;
+  background: #eee;
+  flex-shrink: 0; /* 关键：防止图片被挤扁 */
+}
+
+/* 中间信息区 */
+.info { 
+  flex: 1; /* 占据剩余空间 */
+  overflow: hidden; /* 防止文字溢出 */
+  margin-right: 20rpx;
+}
+
+.top-row { 
+  display: flex; 
+  align-items: center; 
+  margin-bottom: 8rpx; 
+}
+
+.name { 
+  font-size: 32rpx; 
+  font-weight: bold; 
+  color: #333;
+  margin-right: 12rpx; 
+}
+
+.type-tag { 
+  font-size: 20rpx; 
+  padding: 2rpx 8rpx; 
+  border-radius: 6rpx; 
+}
+.type-tag.cat { background: #e6fffb; color: #13c2c2; }
+.type-tag.dog { background: #e6f7ff; color: #1890ff; }
+
+.sub-info { 
+  font-size: 24rpx; 
+  color: #999; 
+  display: block;
+}
+
+/* 右侧操作区 */
+.actions { 
+  display: flex; 
+  gap: 12rpx; 
+  align-items: center; 
+}
+
+.btn-wrapper { 
+  position: relative; /* 用于红点定位 */
+} 
+
+/* 操作按钮通用样式 */
+.action-btn { 
+  font-size: 22rpx; 
+  padding: 8rpx 20rpx; 
+  border-radius: 24rpx;
+  border: 1rpx solid transparent;
+}
+
+.feedback { 
+  background: #fff7e6; 
+  border-color: #ffd591; 
+  color: #fa8c16; 
+}
+
+.edit { 
+  background: #fff; 
+  border-color: #ddd; 
+  color: #333; 
+}
+
+.delete { 
+  background: #fff1f0; 
+  border-color: #ffccc7; 
+  color: #f5222d; 
+}
+
+/* 红点样式 */
+.red-dot {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  background-color: #f5222d;
+  color: #fff;
+  font-size: 18rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 20rpx;
+  z-index: 10;
+  min-width: 24rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 4rpx rgba(245, 34, 45, 0.4);
+  border: 2rpx solid #fff;
+}
+
+.empty { 
+  text-align: center; 
+  color: #999; 
+  margin-top: 100rpx; 
+  font-size: 28rpx;
+}

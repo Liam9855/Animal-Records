@@ -1,0 +1,176 @@
+page {
+  background: #fff;
+  padding-bottom: 120rpx;
+}
+
+.container {
+  padding: 30rpx;
+}
+
+/* 头部样式 */
+.mail-header {
+  margin-bottom: 30rpx;
+}
+
+.subject-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.subject {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.4;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.tag {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+  margin-top: 10rpx;
+}
+.tag.pending { background: #e6f7ff; color: #1890ff; }
+.tag.read { background: #f5f5f5; color: #999; }
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sender-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  background: #722ed1;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+
+.sender-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.date {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.divider {
+  height: 1rpx;
+  background: #eee;
+  margin: 0 30rpx 40rpx;
+}
+
+/* 正文样式 */
+.mail-body {
+  padding: 0 10rpx;
+}
+
+.text-content {
+  font-size: 32rpx;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 40rpx;
+  white-space: pre-wrap; /* 保留换行 */
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #ccc;
+  font-style: italic;
+  margin-bottom: 40rpx;
+}
+
+/* 联系方式块 */
+.contact-block {
+  background: #f9f9f9;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin-bottom: 40rpx;
+  border-left: 8rpx solid #1890ff;
+}
+
+.contact-block .label {
+  font-size: 26rpx;
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.contact-block .value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+/* 附件区域 */
+.attachments {
+  margin-top: 60rpx;
+}
+
+.att-title {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+  padding-bottom: 10rpx;
+  display: inline-block;
+}
+
+.img-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.att-img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  background: #f0f0f0;
+  border: 1rpx solid #eee;
+}
+
+/* 底部工具栏 */
+.footer-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1rpx solid #eee;
+  padding: 20rpx 40rpx 50rpx;
+  box-sizing: border-box;
+}
+
+.btn.delete {
+  background: #fff1f0;
+  color: #ff4d4f;
+  border: 1rpx solid #ffccc7;
+  font-size: 30rpx;
+  border-radius: 40rpx;
+}

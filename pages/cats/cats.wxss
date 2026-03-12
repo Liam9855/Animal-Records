@@ -1,0 +1,2 @@
+/* 直接引入 dogs 的样式，保持统一 */
+@import "../dogs/dogs.wxss";

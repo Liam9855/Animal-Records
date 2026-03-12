@@ -1,0 +1,133 @@
+page {
+  background: #f6f7f9;
+}
+
+.container {
+  padding: 40rpx;
+}
+
+/* 卡片容器 */
+.profile-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 60rpx 40rpx;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 头像区域 */
+.avatar-section {
+  position: relative;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-btn {
+  width: 180rpx;
+  height: 180rpx;
+  padding: 0;
+  border-radius: 50%;
+  background: none;
+  position: relative;
+}
+
+.avatar-btn::after { border: none; }
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6rpx solid #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.uid-tag {
+  margin-top: 20rpx;
+  background: #f0f0f0;
+  color: #666;
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-family: monospace;
+}
+
+/* 2. 昵称行样式 */
+.nickname-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40rpx; /* 调整了间距 */
+  width: 100%;
+}
+
+.nickname-text {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.edit-icon {
+  margin-left: 16rpx;
+  font-size: 36rpx;
+  color: #999;
+  padding: 10rpx;
+}
+
+/* 新增：管理员按钮样式 */
+.admin-entry-box {
+  margin-top: 20rpx;
+  background: #e6f7ff;
+  border: 2rpx solid #1890ff;
+  border-radius: 40rpx;
+  padding: 16rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-btn-text {
+  color: #1890ff;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+/* 按钮 - 此处仅保留登出链接样式 */
+.logout-link {
+  margin-top: 60rpx;
+  font-size: 26rpx;
+  color: #999;
+  text-decoration: underline;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200rpx;
+  color: #999;
+}
+.login-btn { margin-top: 20rpx; }
+
+/* --- 弹窗样式 (保持一致性) --- */
+.modal-mask {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6); z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-content {
+  width: 560rpx; background: #fff; border-radius: 24rpx; padding: 40rpx;
+  display: flex; flex-direction: column; align-items: center;
+}
+.modal-header { font-size: 36rpx; font-weight: bold; margin-bottom: 40rpx; color: #333; }
+.auth-box { display: flex; flex-direction: column; align-items: center; margin-bottom: 40rpx; }
+.auth-avatar-wrapper { width: 140rpx; height: 140rpx; border-radius: 50%; padding: 0; margin-bottom: 16rpx; background: #eee; }
+.auth-avatar { width: 100%; height: 100%; border-radius: 50%; }
+.tip { font-size: 24rpx; color: #999; }
+.auth-input { width: 100%; height: 88rpx; background: #f5f5f5; border-radius: 12rpx; text-align: center; font-size: 30rpx; margin-bottom: 40rpx; }
+.auth-confirm-btn { width: 100%; background: #1890ff; color: #fff; border-radius: 44rpx; font-weight: bold; }

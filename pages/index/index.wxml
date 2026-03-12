@@ -1,0 +1,45 @@
+<view class="universe-container">
+  <!-- 管理员入口已移除，移至个人中心 -->
+
+  <!-- 背景星星 -->
+  <view class="stars"></view>
+  
+  <!-- 中心星球 -->
+  <view class="center-planet">
+    <text class="center-text">Demo</text>
+  </view>
+
+  <!-- 动态轨道区域 -->
+  <view class="orbit-system">
+    <block wx:for="{{animals}}" wx:key="_id">
+      <view class="orbit-ring" 
+            style="width: {{item.orbit_radius * 2}}rpx; height: {{item.orbit_radius * 2}}rpx; top: 50%; left: 50%; margin-left: -{{item.orbit_radius}}rpx; margin-top: -{{item.orbit_radius}}rpx; animation-duration: {{item.speed}}s; animation-delay: {{item.anim_delay}}s;">
+        
+        <view class="planet-wrapper" 
+              bindtap="goToDetail" 
+              data-id="{{item._id}}" 
+              style="animation-duration: {{item.speed}}s; animation-delay: {{item.anim_delay}}s;">
+          
+          <image class="planet-avatar" src="{{item.image_url}}" mode="aspectFill"></image>
+          <text class="planet-name">{{item.nickname}}</text>
+          
+          <!-- 红色数字角标 -->
+          <view class="update-bubble" wx:if="{{item.unreadCount > 0}}">
+            <text>{{item.unreadCount > 99 ? '99+' : item.unreadCount}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部温馨提示 -->
+  <view class="footer-tip">
+    <text>小程序内容仅代表网友个人观点，与动物的任何互动请注意安全！</text>
+  </view>
+
+  <!-- 左下角动图 -->
+  <view class="sticker-box">
+    <!-- 使用云端网络图片链接 -->
+    <image class="sticker-gif" src="/sticker.gif" mode="widthFix"></image>
+  </view>
+</view>

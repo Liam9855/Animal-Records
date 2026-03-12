@@ -1,0 +1,9 @@
+{
+  "name": "markCorrectionRead",
+  "version": "1.0.0",
+  "description": "标记反馈为已读",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}
