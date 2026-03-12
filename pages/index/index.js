@@ -49,7 +49,7 @@ Page({
   // ✅ 新增：开启分享给朋友
   onShareAppMessage: function () {
     return {
-      title: '西那瓦爪印 - 守护校园小可爱',
+      title: 'Demo - 守护校园小可爱',
       path: '/pages/index/index'
     }
   },
