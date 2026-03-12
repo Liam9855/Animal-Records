@@ -1,5 +1,5 @@
 # Animal-Records
-这是一个开源的校园动物档案记录的微信小程序，可以展示校园的猫和狗的档案，用户可以进行动物动态的反馈、评论、动态订阅等互动。下图为使用实例
+<p>这是一个开源的校园动物档案记录的微信小程序，可以展示校园的猫和狗的档案，用户可以进行动物动态的反馈、评论、动态订阅等互动。下图为使用实例</p>
 <img src="https://github.com/user-attachments/assets/58761b78-e301-42dc-843d-f4734eca1a07" width=200>
 <img src="https://github.com/user-attachments/assets/a0c3a4fa-2569-4974-b387-7746382a5f21" width=200>
 <img src="https://github.com/user-attachments/assets/818d98a7-b37f-43a8-9937-1d6745593b5d" width=200>
